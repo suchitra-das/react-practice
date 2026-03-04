@@ -1,9 +1,9 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, data, RouterProvider } from "react-router-dom";
 import { createContext, useState } from "react";
 import "./App.css";
 import Home from "./componets/Home";
 import Card from "./componets/Card";
-import Ecommerce from "./componets/Card";
+
 import Layout from "./Hook/Layout";
 import { Cart } from "./componets/Cart";
 
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
       </Layout>
     ),
   },
-   {
+  {
     path: "cart",
     element: (
       <Layout>
@@ -32,23 +32,69 @@ const router = createBrowserRouter([
       </Layout>
     ),
   },
-  
 ]);
 
-export const AppContext=createContext();
+export const AppContext = createContext([]);
+
 function App() {
-  const [cart,setcart] =useState([]) 
-  const [qty,setqty] =useState(0) 
-  const addtocart = (data)=>{
-    //  setcart(cart[id]?cart[id]+1:cart[id])
-    setcart((prev=>[...prev,data]))
-    setqty((id)=>id?qty+1:1)
-  }
+  const [cart, setcart] = useState([]);
+  const [qty, setqty] = useState(0);
+  const [datas, setDatas] = useState([
+    {
+      id: 1,
+      title: "Card One",
+      value: 10,
+      count: 0,
+    },
+    {
+      id: 2,
+      title: "Card 2",
+      value: 20,
+      count: 0,
+    },
+
+    {
+      id: 3,
+      title: "Card 3",
+      value: 30,
+      count: 0,
+    },
+    {
+      id: 4,
+      title: "Card 4",
+      value: 40,
+      count: 0,
+    },
+    {
+      id: 5,
+      title: "Card 5",
+      value: 50,
+      count: 0,
+    },
+    {
+      id: 6,
+      title: "Card 6",
+      value: 60,
+      count: 0,
+    },
+  ]);
+  const [globalCount, setGlobalCount] = useState(0);
+
+  const addtocart = (id) => {
+    let result = [...datas];
+
+    for (let i = 0; i < result.length; i++) {
+      if (id === result[i].id) {
+        result[i].count++;
+      }
+    }
+    console.log(result, "su");
+  };
   return (
     <div>
-<AppContext.Provider value={{qty,cart,addtocart,setcart}}>
-      <RouterProvider router={router}></RouterProvider>
-</AppContext.Provider>
+      <AppContext.Provider value={{ qty, cart, addtocart, setcart, datas }}>
+        <RouterProvider router={router}></RouterProvider>
+      </AppContext.Provider>
     </div>
   );
 }
