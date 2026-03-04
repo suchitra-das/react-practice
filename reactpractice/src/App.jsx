@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 import "./App.css";
 import Home from "./componets/Home";
 import Card from "./componets/Card";
-import Ecommerce from "./componets/Ecommerce";
+import Ecommerce from "./componets/Card";
 import Layout from "./Hook/Layout";
 import { Cart } from "./componets/Cart";
 
@@ -32,14 +32,7 @@ const router = createBrowserRouter([
       </Layout>
     ),
   },
-  {
-    path: "ecomm",
-    element: (
-      <Layout>
-        <Ecommerce />
-      </Layout>
-    ),
-  },
+  
 ]);
 
 export const AppContext=createContext();

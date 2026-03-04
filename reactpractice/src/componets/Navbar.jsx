@@ -11,11 +11,11 @@ const Navbar = () => {
           <NavLink to="/">Home</NavLink>
         </li>
         <li>
-          <NavLink to="/card">Card</NavLink>
+          <NavLink to="/card" className={({ isActive }) =>
+  `text-xl font-bold cursor-pointe ${isActive ? "text-white" : "text-gray-600"}`
+}>Ecommerce</NavLink>
         </li>
-        <li>
-          <NavLink to="/ecomm">Ecomm</NavLink>
-        </li>
+        
 
         
         <li>
