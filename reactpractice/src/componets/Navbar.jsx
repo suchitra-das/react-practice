@@ -1,6 +1,9 @@
 import { NavLink } from "react-router-dom";
+import {AppContext} from '../App.jsx'
+import { useContext } from "react";
 
 const Navbar = () => {
+      const {qty} =useContext(AppContext)
   return (
     <div className="bg-amber-500">
       <ul className="flex  justify-between p-10">
@@ -8,11 +11,15 @@ const Navbar = () => {
           <NavLink to="/">Home</NavLink>
         </li>
         <li>
+          <NavLink to="/card">Card</NavLink>
+        </li>
+        <li>
           <NavLink to="/ecomm">Ecomm</NavLink>
         </li>
 
+        
         <li>
-          <NavLink to="/card">Card</NavLink>
+          <NavLink to="/cart">Cart<sup className="rounded-full p-1 bg-red-700">{qty}</sup></NavLink>
         </li>
       </ul>
     </div>
