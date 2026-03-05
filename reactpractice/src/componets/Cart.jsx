@@ -2,19 +2,24 @@ import React, { useContext } from "react";
 import { AppContext } from "../App.jsx";
 
 export const Cart = () => {
-  const { cart } = useContext(AppContext);
+  const { datas } = useContext(AppContext);
+
+  const cartItems = datas.filter((item) => item.count > 0);
 
   return (
     <div>
-      {cart.length == 0
-        ? "Cart is Empty"
-        : cart.map((c) => (
-            <div className="flex justify-around">
-              <div>{c.id}</div>
-              <div>{c.title}</div>
-              <div>{c.value}</div>
-            </div>
-          ))}
+      {cartItems.length === 0 ? (
+        "Cart is Empty"
+      ) : (
+        cartItems.map((d) => (
+          <div key={d.id} className="flex justify-around">
+            <div>{d.id}</div>
+            <div>{d.title}</div>
+            <div>{d.value}</div>
+            <div>Qty: {d.count}</div>
+          </div>
+        ))
+      )}
     </div>
   );
 };

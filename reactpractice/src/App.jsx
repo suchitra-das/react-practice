@@ -1,5 +1,5 @@
-import { createBrowserRouter, data, RouterProvider } from "react-router-dom";
-import { createContext, useState } from "react";
+import { createBrowserRouter,  RouterProvider } from "react-router-dom";
+import { createContext, useEffect, useState } from "react";
 import "./App.css";
 import Home from "./componets/Home";
 import Card from "./componets/Card";
@@ -37,8 +37,8 @@ const router = createBrowserRouter([
 export const AppContext = createContext([]);
 
 function App() {
-  const [cart, setcart] = useState([]);
-  const [qty, setqty] = useState(0);
+  // const [cart, setcart] = useState([]);
+  // const [qty, setqty] = useState(0);
   const [datas, setDatas] = useState([
     {
       id: 1,
@@ -85,14 +85,34 @@ function App() {
 
     for (let i = 0; i < result.length; i++) {
       if (id === result[i].id) {
-        result[i].count++;
+        result[i] = { ...result[i], count: result[i].count + 1 };
+
+        setGlobalCount((prev) => prev + 1);
       }
     }
-    console.log(result, "su");
+
+    setDatas(result);
   };
+
+
+  useEffect(()=>{
+    localStorage.setItem("datas", JSON.stringify(datas))
+},[datas])
+
+
+useEffect(()=>{
+
+  const storeData = localStorage.getItem("datas")
+
+    if (storeData) {
+    setDatas(JSON.parse(storeData));
+  }
+},[
+
+])
   return (
     <div>
-      <AppContext.Provider value={{ qty, cart, addtocart, setcart, datas }}>
+      <AppContext.Provider value={{  addtocart, datas , globalCount}}>
         <RouterProvider router={router}></RouterProvider>
       </AppContext.Provider>
     </div>

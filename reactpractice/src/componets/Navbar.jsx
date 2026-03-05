@@ -3,7 +3,7 @@ import {AppContext} from '../App.jsx'
 import { useContext } from "react";
 
 const Navbar = () => {
-      const {qty} =useContext(AppContext)
+      const {globalCount} =useContext(AppContext)
   return (
     <div className="bg-amber-500">
       <ul className="flex  justify-between p-10">
@@ -19,7 +19,7 @@ const Navbar = () => {
 
         
         <li>
-          <NavLink to="/cart">Cart<sup className="rounded-full p-1 bg-red-700">{qty}</sup></NavLink>
+          <NavLink to="/cart">Cart<sup className="rounded-full p-1 bg-red-700">{globalCount}</sup></NavLink>
         </li>
       </ul>
     </div>
